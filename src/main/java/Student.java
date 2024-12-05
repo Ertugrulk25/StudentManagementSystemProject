@@ -10,12 +10,19 @@ public class Student {
 
     private int age;
 
+
+    // pmetresiz-pmatreli Constructor
+    public Student() {
+    }
+
     public Student(String name, String lastName, String city, int age) {
         this.name = name;
         this.lastName = lastName;
         this.city = city;
         this.age = age;
     }
+
+
 
     public Integer getId() {
         return id;

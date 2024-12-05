@@ -8,6 +8,7 @@ public class JdbcUtils {
     public static PreparedStatement prst;
 
     //4-a: connection bağlantısını olusturma
+    // url-username-password
     public static void setConnection(){
         try {
             connection=DriverManager.getConnection("jdbc:postgresql://localhost:5432/jdbcStudentManagement",

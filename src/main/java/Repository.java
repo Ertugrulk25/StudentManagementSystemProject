@@ -1,17 +1,17 @@
 import java.util.List;
 
-public interface Repository<S, I extends Number> {
+public interface Repository<S, U extends Number> {
 
     //7-t_student tablosunu olusturma
     void createTable();
 
-    void save(Student entity);
+    void save(S entity);
 
-    List<Student> findAll();
+    List<S> findAll();
 
-    void update(Student entity);
+    void update(S entity);
 
-    void deleteById(Integer id);
+    void deleteById(U id);
 
-    Student findById(Integer id);
+    S findById(U id);
 }
