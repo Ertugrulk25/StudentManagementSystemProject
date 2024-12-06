@@ -132,6 +132,20 @@ e.printStackTrace();
     @Override
     public void deleteById(Integer id) {
 
+        JdbcUtils.setConnection();
+        JdbcUtils.setStatement();
+        try {
+           int deleted = JdbcUtils.st.executeUpdate("DELETE  FROM t_student WHERE id ="+id);
+        //kayıt bulunursa 1 kayıt yoksa 0 kayıt silinir.
+            if (deleted>0){
+                System.out.println("Öğrenci silindi. ID : "+ id);
+            }else {
+                System.out.println("ID si verilen öğrenci silinemedi. ");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 // id si verilen öğrenciyi bulma
 

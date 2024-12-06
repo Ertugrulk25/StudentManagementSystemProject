@@ -29,16 +29,19 @@ do {
     System.out.println("Öğrenciyi Güncelleme");
     System.out.println("Öğrenciyi Silme");
     System.out.println("Tek Bir Öğrenciyi Görüntüleme");
+    System.out.println("Tüm öğrencilerin ad soyad bilgilerini rapora yazdırma ");
     System.out.println("Çıkış");
     System.out.println("İşlem Seçiniz: ");
     select = imp.nextInt();
     imp.nextLine();
 
-    switch (select){
+    switch (select) {
         case 1:
             //bilgileri verilen öğrenciyi kaydetme
             Student newStudent = service.getStudentInfo();
+            new Thread(()->{
             service.saveStudent(newStudent);
+        }).start();
             break;
         case 2:
             // öğrencileri databaseden çekip consola yazdırma
@@ -47,17 +50,26 @@ do {
             break;
         case 3:
             //id si verilen öğrenciyi güncelleme
-        id= getIdInfo();
+            id = getIdInfo();
+            service.updateStudentById(id);
             break;
         case 4:
             //id si verilen öğrenciyi silme
-            id=getIdInfo();
+            id = getIdInfo();
+            service.deleteStudentById(id);
+
             break;
         case 5:
-           id= getIdInfo();
-           service.printStudentById(id);
-           //id si verlien öğrenciyi görüntüleme
+            id = getIdInfo();
+            service.printStudentById(id);
+            //id si verlien öğrenciyi görüntüleme
+            break;
+        case 6:
 
+            new Thread(() -> {
+
+            service.generateReport();
+    }).start();
             break;
         case 0:
             System.out.println("İyi Günler...");

@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,7 +72,53 @@ public void saveStudent(Student newStudent){
 
 
     }
+//11- id si verilen öğrencinin bilgilerini yeni bilgiler ile değiştirme
+public void updateStudentById(int id){
+        // bu id ile öğrenci var mı?
+   Student foundStudent = getStudentById(id);
+   if (foundStudent==null){
+       System.out.println("Id si Verilen Öğrenci Bulunamadı..." + id);
 
+   }else {
+     Student newStudent = getStudentInfo();
+     //var olan öğrencinin bilgilerini yeni öğrencinin bilgileri ile değiştir.
+       foundStudent.setName(newStudent.getName());
+       foundStudent.setLastName(newStudent.getLastName());
+       foundStudent.setCity(newStudent.getCity());
+       foundStudent.setAge(newStudent.getAge());
+       //id aynı kalır.
+       repo.update(foundStudent);
+       System.out.println("");
+   }
+}
+//12- id si verilen öğrenciyi silme
+    public void deleteStudentById(int id){
+        repo.deleteById(id);
+
+    }
+    //13- Tüm öğrencilerin bilgilerini rapora yadırma
+
+    public void generateReport(){
+       List<Student> allStudents = repo.findAll();
+        System.err.println("Report is loading...");
+
+        try {
+            Thread.sleep(10000);
+
+            FileWriter writer =  new FileWriter("student_report.txt");
+            writer.write("***  StudentReport   ***\n");//yeni satira geçsin diye \n
+            writer.write("--------------------------------------\n");
+            for (Student student : allStudents){
+                writer.write("Ad: "+ student.getName()+ "Soyad: "+ student.getLastName()+"\n");
+            }
+            writer.close();
+            System.err.println("Report generated and printed to student_report.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
 
